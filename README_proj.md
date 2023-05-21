@@ -1374,12 +1374,104 @@ No próximo vídeo, vamos aprender sobre Global Style.
 
 <br><br>
 
-# Aula 02.03
+# Aula 03.06
+
+Vamos clicar no botão "Recolher Pastas no Explorador", que fica ao lado do nome da pasta "ALURA BOOKS", no menu lateral esquerdo. Isso minimiza as pastas, facilitando a visualização.
+
+Vamos fechar, também, todas as abas abertas. Vamos falar sobre Global Style, que são estilos específicos padronizados para toda a aplicação, como fonte e reset de CSS, por exemplo.
+
+Para começar, vamos acessar "src > index.js". Nesse arquivo, o React usa root para exibir e manipular os elementos da tela. É aí que vamos inserir o Global Style.
+
+Agora vamos acessar "src > index.css". Esse arquivo funciona, basicamente, como um CSS padrão. De volta a "src > index.js", vamos importar o Global Style, com { createGlobalStyle } from 'styled-components':
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { createGlobalStyle } from 'styled-components'
+
+// ...COPIAR CÓDIGO
+Logo abaixo, vamos criar a constante GlobalStyle, igualando-a a createGlobalStyle. Dentro das crases, passaremos o conteúdo do arquivo "src > index.css":
+
+import React, { createFactory } from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+    }
+`COPIAR CÓDIGO
+Obs: Dessa vez, não removemos body e code porque eles se referem a elementos, não a classes.
+
+Vamos levar, também, o conteúdo de li {, no arquivo "App.js", para "src > index.js":
+
+import React, { createFactory } from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+    }
+
+    li {
+      list-style: none;
+    }
+`
+
+// ...COPIAR CÓDIGO
+Com isso, não teremos ícones de decoração nos itens de nenhuma lista. Vamos apagar a importação de "index.css".
+
+Abaixo de <React.StrictMode>, vamos inserir <GlobalStyle />:
+
+// ...
+
+root.render(
+  <React.StrictMode>
+    <GlobalStyle />
+    <App />
+  </React.StrictMode>
+);
+
+// ...COPIAR CÓDIGO
+De volta à aplicação, tudo está funcionando. Podemos deletar "src > index.css". Agora, nosso código não tem mais arquivos CSS.
+
+No próximo vídeo, vamos criar componentes de search.
 
 
 <br><br>
 
 # Aula 02.03
+
+
 
 
 <br><br>
