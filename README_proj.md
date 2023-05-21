@@ -1469,19 +1469,223 @@ No próximo vídeo, vamos criar componentes de search.
 
 <br><br>
 
-# Aula 02.03
+# Aula 04.02
 
+Nessa aula vamos focar em conceitos clássicos do React. Vamos lidar com Estado.
 
+Quando lidamos com React, a tela exibe dados mutáveis. Para lidar com isso, precisamos lidar com a ferramenta do React conhecida como Estado.
+
+Vamos usá-lo para criar um componente de pesquisa funcional, para que os usuários consigam buscar livros na nossa aplicação. Vamos voltar ao código.
+
+Para isso, precisaremos criar a seção Pesquisa no código do arquivo "App.js". Dentro da função App(), logo abaixo de <Header />, criaremos <Pesquisa />:
+
+// ...
+
+function App() {
+    return (
+        <AppContainer>
+      <Header />
+      <Pesquisa />
+    </AppContainer>
+  );
+}
+
+export default AppCOPIAR CÓDIGO
+Para que funcione, precisamos importar o componente, porém ele ainda não foi criado. Vamos criar uma pasta para ele chamada "Pesquisa", dentro de "src > componentes". Dentro dela, criaremos o arquivo "index.js". Vamos acessar esse arquivo e começar a codar o componente.
+
+Vamos criar a função Pesquisa(), sem parâmetro algum por enquanto. Seu retorno será o componente. Dentro dos parênteses, vamos escrever "Já sabe por onde começar?" entre chaves <h2>:
+
+function Pesquisa() {
+    return (
+        <h2>Já sabe por onde começar?</h2>
+    )
+}COPIAR CÓDIGO
+Abaixo do <h2>, entre tags <h3>, vamos digitar "Encontre seu livro em nossa estante:
+
+function Pesquisa() {
+    return (
+        <h2>Já sabe por onde começar?</h2>
+        <h3>Encontre seu livro em nossa estante.</h3>
+    )
+}COPIAR CÓDIGO
+Vamos englobar essas tags entre chaves <section>, que representam seções:
+
+function Pesquisa() {
+    return (
+        <section>
+            <h2>Já sabe por onde começar?</h2>
+            <h3>Encontre seu livro em nossa estante.</h3>
+        </section>
+    )
+}COPIAR CÓDIGO
+Acrescentaremos uma tag <input /> também, onde o usuários digitará o nome do livro. Dentro dela, vamos inserir o parâmetro placeholder, passando "Escreva sua próxima leitura":
+
+function Pesquisa() {
+    return (
+        <section>
+            <h2>Já sabe por onde começar?</h2>
+            <h3>Encontre seu livro em nossa estante.</h3>
+            <input
+                placeholder="Escreva sua próxima leitura"
+            />
+        </section>
+    )
+}COPIAR CÓDIGO
+Ao finao do arquivo, vamos inserir o export default com o nome da função, para que possamos utilizar o componente em outros lugares do código:
+
+function Pesquisa() {
+    return (
+        <section>
+            <h2>Já sabe por onde começar?</h2>
+            <h3>Encontre seu livro em nossa estante.</h3>
+            <input
+                placeholder="Escreva sua próxima leitura"
+            />
+        </section>
+    )
+}
+
+export default PesquisaCOPIAR CÓDIGO
+De volta a "App.js", vamos importar Pesquisa, com import Pesquisa from './componentes/Pesquisa'. Vamos salvar:
+
+import Header from './componentes/Header'
+import Pesquisa from './componentes/Pesquisa'
+import styled from 'styled-components'
+
+// ...COPIAR CÓDIGO
+Se voltarmos a aplicação, veremos o título, a mensagem e o input com o placeholder.
+
+Vamos deixar o input de pesquisa mais bonito e torná-lo um componente independente e reutilizável, que possa ser usado em outros lugares do código.
+
+Vamos criar uma nova pasta dentro de "componentes", chamada "Input". Dentro dela, criaremos o arquivo "index.js". Em componentes simples como esse, podemos criar diretamente um Styled Components.
+
+Faremos isso importando o Styled Components, na primeira linha der "componentes > Input > index.js", com import styled from "styled-components".
+
+Abaixo, criaremos a constante Input em que definiremos o estilo e, ao final do arquivo, vamos inserir o export default:
+
+import styled from 'styled-components'
+
+const Input = styled.input`
+
+`
+
+export default InputCOPIAR CÓDIGO
+Como o foco do curso não é CSS, vamos inserir uma estilização pronta. O código de index.js do componente Input ficará assim:
+
+import styled from "styled-components"
+
+const Input = styled.input`
+        order: 1px solid #FFF;
+        background: transparent;
+        border: 1px solid #FFF;
+        padding: 20px 140px;
+        border-radius: 50px;
+        width: 200px;
+        color: #FFF;
+        font-size: 16px;
+        margin-bottom: 10px;
+
+        &::placeholder {
+                color: #FFF;
+                font-size: 16px;
+        }
+`
+
+export default InputCOPIAR CÓDIGO
+Vamos salvar. Depois, voltaremos para o arquivo "componentes > Pesquisa > index.js" e, lá, importaremos Input. Substituiremos, também, <input por <Input:
+
+import Input from '../Input'
+
+function Pesquisa() {
+    return (
+        <section>
+            <h2>Já sabe por onde começar?</h2>
+            <h3>Encontre seu livro em nossa estante.</h3>
+            <Input
+                placeholder="Escreva sua próxima leitura"
+            />
+        </section>
+    )
+}
+
+export default PesquisaCOPIAR CÓDIGO
+Se voltarmos ao navegador, veremos a mudança no input de busca. Vamos modificar outros elementos, para que também fiquem agradáveis visualmente.
+
+Dentro da função Pesquisa(), substituiremos <section> por <PesquisaContainer>. Substituiremos, também, <h2> por <Titulo> e <h3> por <Subtitulo>:
+
+import Input from '../Input'
+
+function Pesquisa() {
+    return (
+        <PesquisaContainer>
+            <Titulo>Já sabe por onde começar?</Titulo>
+            <Subtitulo>Encontre seu livro em nossa estante.</Subtitulo>
+            <Input
+                placeholder="Escreva sua próxima leitura" />
+        </PesquisaContainer>
+    )
+}
+
+export default PesquisaCOPIAR CÓDIGO
+Depois, importaremos o Styled Components e criaremos a constante PesquisaContainer, igualando-a a styled.section. Abaixo, criaremos a constante Titulo, igualando-a a styled.h2. Também criaremos a constante Subtitulo, igualada a styled.h3:
+
+import Input from '../Input'
+import styled from 'styled-components'
+
+const PesquisaContainer = styled.section`
+
+`
+
+const Titulo = styled.h2`
+
+`
+
+const Subtitulo = styled.h3`
+
+`
+
+// ...COPIAR CÓDIGO
+A seguir, vamos incluir a estilização nessas constantes:
+
+import Input from '../Input'
+import styled from 'styled-components'
+
+const PesquisaContainer = styled.section`
+        background-image: linear-gradient(90deg, #002F52 35%, #326589 165%);
+        color: #FFF;
+        text-align: center;
+        padding: 85px 0;
+        height: 270px;
+        width: 100%;
+`
+
+const Titulo = styled.h2`
+        color: #FFF;
+        font-size: 36px;
+        text-align: center;
+        width: 100%;
+`
+
+const Subtitulo = styled.h3`
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 40px;
+`
+
+// ...COPIAR CÓDIGO
+Agora podemos salvar. A interface da aplicação está mais bonita.
+
+No próximo vídeo, finalmente, vamos manipular os estados, para que as buscas sejam realmente processadas pela aplicação.
 
 
 <br><br>
 
-# Aula 02.03
+# Aula 04.03
 
 
 <br><br>
 
-# Aula 02.03
+# Aula 04.04
 
 
 <br><br>
