@@ -119,4 +119,184 @@ No próximo vídeo, trabalharemos no cabeçalho do nosso site!
 
 <br><br>
 
-# Aula 01.07
+# Aula 02.03
+
+Agora vamos começar a pensar na nossa aplicação, o site de livros. Começaremos pelo header, o menu superior na qual o usuário conseguirá navegar pelo site.
+
+Vamos voltar à IDE e abrir o arquivo "App.js". Nossa primeira ação será excluir o código de<img src=[logo] className="App-logo" alt="logo" /> até </a>. Do conteúdo, só não apagaremos a tag <header>:
+
+import logo from './logo.svg';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+
+      </header>
+    </div>
+  );
+}
+
+export default App;COPIAR CÓDIGO
+Vamos executar "Ctrl + S" e salvar o arquivo. Alguns avisos aparecerão no nosso terminal, devido ao que apagamos há pouco, mas em breve eles sumirão.
+
+Acessando o navegador, a tela estará vazia, exibindo uma cor diferente. Vamos acessar o arquivo "App.css" e apagar todo o código. Criaremos nosso arquivo CSS do zero.
+
+Precisamos lembrar de salvar o arquivo com "Ctrl + S" (ou "Command + S", caso você esteja usando Mac). De volta à aplicação, veremos o fundo branco, que indica a navegação vazia.
+
+De volta a "App.js", vamos começar a escrever código. A linha import logo from './logo.svg'; deve ser deletada, porque estava relacionada ao logo que não existe mais na aplicação:
+
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+
+      </header>
+    </div>
+  );
+}
+
+export default App;COPIAR CÓDIGO
+Já que não estamos mais usando a imagem logo.svg, vamos deletá-la do nosso projeto. Na estrutura de arquivos na lateral esquerda da IDE, vamos selecioná-la, pressionar "Delete" e confirmar s remoção.
+
+Obs: Componentes React são funções que retornam HTMLs. Os imports existem para "puxar" informações de outros arquivos.
+
+A primeira linha do código, import './App.css'; faz a importação do arquivo "App.css". Essa linha é responsável por inserir a estilo à aplicação.
+
+Vamos deletar os className do código. O código vai ficar assim:
+
+import './App.css';
+
+function App() {
+  return (
+    <div>
+      <header>
+
+      </header>
+    </div>
+  );
+}
+
+export default App;COPIAR CÓDIGO
+Na documentação do treinamento, você encontrará as imagens que utilizaremos agora para criar o header da aplicação. Vamos clicar sobre a pasta "src" com o botão direito do mouse e criar uma nova pasta, chamada "imagens".
+
+Vamos selecionar as imagens e adicioná-las a essa pasta. As usaremos durante todo o nosso processo de desenvolvimento.
+
+Vamos adicionar classes aos componentes, para que possamos executar CSS. Faremos isso adicionando className="" às tags <div>, que se chamará App, e <header>, que se chamará App-header:
+
+import './App.css';
+
+function App() {
+  return (
+    <div className='App'>
+      <header className='App-header'>
+
+      </header>
+    </div>
+  );
+}
+
+export default App;COPIAR CÓDIGO
+Agora vamos começar a criar o conteúdo do header, que consistirá em um logo e em algumas opções. Primeiro, criaremos uma <div>, com a classe logo:
+
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <header className='App-header'>
+        <div className='logo'>
+
+        </div>
+      </header>
+    </div>
+  );
+}
+
+export default App;COPIAR CÓDIGO
+Depois, vamos inserir o logo. Faremos isso adicionando import logo from './imagens/logo.svg', logo abaixo de import '/App.css';. Abaixo de <div className='logo'>, vamos inserir <img src={logo}></img>, com um alt (texto alternativo). Isso fará com que o SRC seja igual à logo:
+
+import './App.css';
+import logo from './imagens/logo.svg';
+
+function App() {
+  return (
+    <div className="App">
+      <header className='App-header'>
+        <div className='logo'>
+          <img src={logo} alt='logo'></img>
+        </div>
+      </header>
+    </div>
+  );
+}
+
+export default App;COPIAR CÓDIGO
+Vamos abrir uma tag <p> logo abaixo de <img> e escrever "Alura Books":
+
+import './App.css';
+import logo from './imagens/logo.svg';
+
+function App() {
+  return (
+    <div className="App">
+      <header className='App-header'>
+        <div className='logo'>
+          <img src={logo} alt='logo'></img>
+          <p>Alura Books</p>
+        </div>
+      </header>
+    </div>
+  );
+}
+
+export default App;COPIAR CÓDIGO
+Vamos apertar "Ctrl + S" para salvar a aplicação. Fazendo a atualização do navegador, encontraremos a logo do nosso site, um triângulo laranja, e "Alura Books", o nome do site, logo abaixo, ainda sem estilização.
+
+Vamos adicionar a tag <strong> dentro da tag <p>. Isso deixará o texto em negrito. Vamos adicionar, dentro delas, "Alura":
+
+import './App.css';
+import logo from './imagens/logo.svg';
+
+function App() {
+  return (
+    <div className="App">
+      <header className='App-header'>
+        <div className='logo'>
+          <img src={logo} alt='logo'></img>
+          <p><strong>Alura</strong>Books</p>
+        </div>
+      </header>
+    </div>
+  );
+}
+
+export default App;COPIAR CÓDIGO
+Quando salvarmos e voltarmos à aplicação, veremos que "Alura" agora está em negrito.
+
+Vamos acessar "App.css", para estilizar a logo. Queremos que ela fique disponível na horizonte. Vamos fazer isso inserindo .logo, abrindo chaves e passando display: flex:
+
+.logo {
+    display: flex;
+}COPIAR CÓDIGO
+Voltando ao navegador, teremos tido sucesso no nosso objetivo.
+
+No próximo vídeo, vamos aprender a componentizar.
+
+
+<br><br>
+
+# Aula 02.04
+
+
+<br><br>
+
+# Aula 02.03
+
+
+<br><br>
+
+# Aula 02.03
