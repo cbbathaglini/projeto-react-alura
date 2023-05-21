@@ -4,6 +4,7 @@ https://cursos.alura.com.br/formacao-full-stack-react-node-js
 https://create-react-app.dev/docs/getting-started/
 https://nodejs.org/en/docs
 
+# textos abaixo foram retirados do curso da alura
 # Aula 01.02
 ## teoria / história do React
 
@@ -1051,9 +1052,18 @@ Na próxima aula, vamos instalar o pacote e conhecer melhor a ferramenta.
 
 <br><br>
 
-# Aula 02.03
+# Aula 03.02
+Hoje, vamos aprender a usar o **Styled Components**, uma nova ferramenta que nos ajudará a criar componentes apenas com o JavaScript, sem utilizar arquivos CSS.
 
+Vamos começar instalando a ferramenta. No Visual Studio Code, vamos clicar em "Terminal > Novo Terminal". Com o comando npm start, faremos nosso projeto rodar. Vamos apertar "Ctrl + C", para que a aplicação pare de rodar no navegador.
 
+Vamos rodar, agora, o comando npm install styled-components ou npm install styled-components@5.3.10. Com isso, instalaremos o Styled Components.
+
+De volta ao arquivo "App.js", vamos voltar a rodar nosso projeto com npm start. Acessando styled-components.com, você encontra a documentação completa da nova ferramenta.
+
+No próximo vídeo, vamos começar a criar containers com a ajuda do Styled Components.
+
+https://styled-components.com/
 
 <br><br>
 
