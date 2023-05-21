@@ -737,7 +737,316 @@ No próximo vídeo, vamos voltar a manipular componentes.
 
 <br><br>
 
-# Aula 02.09
+# Aula 02.10
+
+Agora o layout do header está finalizado. Vamos olhar um pouco para nosso código.
+
+Podemos deixá-lo mais enxuto. Ele está, atualmente, muito poluído. Vamos resolver isso com algo que aprendemos anteriormente: a componentização.
+
+O primeiro componente que colocaremos em um ambiente separado é a lista de opções. Logo depois, faremos o mesmo com a lista de ícones.
+
+Em Apps.js, vamos recortar todo o conteúdo desde a tag <ul className='opcoes'> até </ul>:
+
+<ul className='opcoes'>
+    { textoOpcoes.map ( (texto) => (
+        <li className='opcao'><p>{texto}</p></li>
+    ) ) }
+</ul>COPIAR CÓDIGO
+Em "src > componentes", criaremos uma pasta chamada "OpcoesHeader". Dentro dela, criaremos dois arquivos: "index.js" e "estilo.css".
+
+Acessando "index.js", vamos criar a função "OpcoesHeader". O retorno dela será o componente que acabamos de recortar. O código ficará assim, com export default OpcoesHeader no final:
+
+function OpcoesHeader() {
+    return (
+        <ul className='opcoes'>
+            { textoOpcoes.map ( (texto) => (
+                <li className='opcao'><p>{texto}</p></li>
+            ) ) }
+        </ul>
+    )
+}
+
+export default OpcoesHeaderCOPIAR CÓDIGO
+Agora, estamos usando a constante textoOpcoes em index.js, então precisamos movê-la para esse arquivo. Em App.js, vamos recortar a linha em que declaramos textoOpcoes e colá-la no início de index.js:
+
+const textoOpcoes = ['CATEGORIAS', 'FAVORITOS', 'MINHA ESTANTE']
+
+function OpcoesHeader() {
+    return (
+        <ul className='opcoes'>
+            { textoOpcoes.map ( (texto) => (
+                <li className='opcao'><p>{texto}</p></li>
+            ) ) }
+        </ul>
+    )
+}
+
+export default OpcoesHeaderCOPIAR CÓDIGO
+Se atualizarmos a página da aplicação no navegador, vamos reparar que a lista de opções sumiu, porque nós exportamos o componente, porém não o incluímos no arquivo App.js.
+
+Portanto, vamos importar o novo componente no início do arquivo App.js e utilizá-lo após <Logo></Logo>, adicionando <OpcoesHeader></OpcoesHeader>. Após todas essas alterações, o arquivo App.js ficará assim:
+
+import './App.css';
+import Logo from './componentes/Logo'
+import perfil from './imagens/perfil.svg'
+import sacola from './imagens/sacola.svg'
+import OpcoesHeader from './componentes/OpcoesHeader'
+
+const icones = [perfil, sacola]
+
+function App() {
+    return (
+        <div className='App'>
+            <header className='App-header'>
+                <Logo></Logo>
+        <OpcoesHeader></OpcoesHeader>
+        <ul className='icones'>
+            { icones.map( (icone) => (
+              <li className='icone'><img src={icone}></img></li>
+            )) }
+        </ul>
+      </header>
+    </div>
+  );
+}
+
+export default AppCOPIAR CÓDIGO
+Vamos salvar. De volta ao navegador, as opções do header voltaram a aparecer!
+
+Repetiremos o processo para os ícones. Em "src > componentes", vamos criar a pasta "IconesHeader", com os arquivos "index.js" e "estilo.css" dentro dela.
+
+Em index.js, criaremos a função IconesHeader() que retornará um componente. Abriremos o arquivo App.js e recortaremos desde a tag <ul className= 'icones'> até </ul>. Em seguida, colaremos esse bloco dentro da função IconesHeader():
+
+function IconesHeader() {
+    return (
+        <ul className='icones'>
+            { icones.map( (icone) => (
+            <li className='icone'><img src={icone}></img></li>
+            )) }
+        </ul>
+    )
+}COPIAR CÓDIGO
+Assim como fizemos com a constante textoOpcoes, vamos mover a constante icones do arquivo App.js para o início do arquivo index.js do componente IconesHeader:
+
+const icones = [perfil, sacola]
+
+function IconesHeader() {
+    return (
+        <ul className='icones'>
+            { icones.map( (icone) => (
+            <li className='icone'><img src={icone}></img></li>
+            )) }
+        </ul>
+    )
+}COPIAR CÓDIGO
+Além disso, precisamos da importação das imagens no arquivo index.js. O caminho para importação será diferente do que usamos em App.js, porque precisaremos voltar algumas pastas.
+
+Por fim, não podemos nos esquecer de exportar o componente.
+
+Após todas essas modificações, o arquivo "IconesHeader > index.js" ficará com o seguinte código:
+
+import perfil from './imagens/perfil.svg'
+import sacola from './imagens/sacola.svg'
+
+const icones = [perfil, sacola]
+
+function IconesHeader() {
+    return (
+        <ul className='icones'>
+            { icones.map( (icone) => (
+            <li className='icone'><img src={icone}></img></li>
+            )) }
+        </ul>
+    )
+}
+
+export default IconesHeaderCOPIAR CÓDIGO
+Agora, basta fazer a importação de IconesHeader no início do arquivo "App.js". Abaixo de <OpcoesHeader></OpcoesHeader>, vamos inserir <IconesHeader></IconesHeader>:
+
+import './App.css';
+import Logo from './componentes/Logo'
+import OpcoesHeader from './componentes/OpcoesHeader'
+import IconesHeader from './componentes/IconesHeader'
+
+function App() {
+    return (
+        <div className='App'>
+            <header className='App-header'>
+                <Logo></Logo>
+                <OpcoesHeader></OpcoesHeader>
+                <IconesHeader></IconesHeader>
+            </header>
+        </div>
+  );
+}
+
+export default AppCOPIAR CÓDIGO
+Agora estamos reaproveitando os componentes. O código está bem mais enxuto e a aplicação segue funcionando normalmente.
+
+Agora vamos manipular os dois arquivos "estilo.css" que acabamos de criar. Vamos usá-los para diminuir o tamanho do código do arquivo "App.css".
+
+Abrindo "App.css", vamos selecionar os códigos de .opcoes a .opcao e levá-los para "OpcoesHeader > estilo.css":
+
+.opcoes {
+    display: flex;
+}
+
+.opcao {
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  padding: 0 5px;
+  cursor: pointer;
+  min-width: 120px;
+}COPIAR CÓDIGO
+Voltando a App.css, vamos recortar o código referente a .icones e .icone e levá-lo para "IconesHeader > estilo.css":
+
+.icones {
+    display: flex;
+    align-items: center;
+}
+
+.icone {
+margin-right: 40px;
+width: 25px;
+}COPIAR CÓDIGO
+Com isso, separamos os arquivos CSS e otimizamos nossos códigos. O arquivo App.css ficou mais enxuto, apenas com a estilização geral da aplicação:
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(90deg, #002F52 35%, #326589);
+}
+
+.App-header {
+  background-color: #FFF;
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  list-style: none;
+}COPIAR CÓDIGO
+Se atualizarmos o navegador, todos os elementos estarão fora do lugar, a estilização não está sendo aplicada corretamente. Precisamos importar os novos CSS nos arquivos.
+
+Vamos acessar "OpcoesHeader > index.js" e, na primeira linha do código, importar o novo caminho:
+
+import './estilo.css'
+
+const textoOpcoes = ['CATEGORIAS', 'FAVORITOS', 'MINHA ESTANTE']
+
+function OpcoesHeader() {
+    return (
+        <ul className='opcoes'>
+            { textoOpcoes.map ( (texto) => (
+                <li className='opcao'><p>{texto}</p></li>
+            ) ) }
+        </ul>
+    )
+}
+
+export default OpcoesHeaderCOPIAR CÓDIGO
+Repetiremos o processo em "IconesHeader > index.js":
+
+import './estilo.css'
+import perfil from '../../imagens/perfil.svg'
+import sacola from '../../imagens/sacola.svg'
+
+const icones = [perfil, sacola]
+
+function IconesHeader() {
+    return (
+        <ul className='icones'>
+            { icones.map( (icone) => (
+            <li className='icone'><img src={icone}></img></li>
+            )) }
+        </ul>
+    )
+}
+
+export default IconesHeaderCOPIAR CÓDIGO
+Agora, se atualizarmos o navegador, veremos que o header da aplicação continua funcionando normalmente.
+
+Como os componentes <Logo>, <OpcoesHeader> e <IconesHeader>, do arquivo "App.js", não têm nada dentro deles, podemos remover as tags de fechamento e usar uma barra para representar seu fechamento, da seguinte forma:
+
+// ...
+
+<header className='App-header'>
+    <Logo/>
+    <OpcoesHeader/>
+    <IconesHeader/>
+</header>
+
+//...COPIAR CÓDIGO
+Fazendo isso, otimizamos o código e não alteramos nada na aplicação.
+
+Todas as páginas da aplicação terão o mesmo header, então também podemos reaproveitá-lo, transformando-o em um componente. Assim, poderemos substituir todo o conteúdo de <header> até </header> por um componente <Header />.
+
+Vamos repetir o mesmo que fizemos com todos os componentes. Em "src > componentes", criaremos a pasta "Header". Dentro dela, criaremos os arquivos "index.js" e "estilo.css".
+
+Em "Header > index.js", criaremos a função Header() que retornará um componente. Em App.js, recortaremos de <header clasName='App-header'> até </header> e colaremos esse trecho na função Header(). Ao final do arquivo, vamos exportar o componente:
+
+function Header() {
+    return(
+        <header className='App-header'>
+            <Logo/>
+            <OpcoesHeader/>
+            <IconesHeader/>
+        </header>
+    )
+}
+
+export default HeaderCOPIAR CÓDIGO
+Vamos copiar, no arquivo "App.css", a parte do código referente a .App-header e levá-la para "Header > estilo.css". Eis o código:
+
+.App-header {
+        background-color: #FFF;
+        display: flex;
+        justify-content: center;
+}COPIAR CÓDIGO
+Em "Header > index.js", faremos a importação do estilo.css no início do arquivo:
+
+import './estilo.css'
+
+function Header() {
+    return(
+        <header className='App-header'>
+            <Logo/>
+            <OpcoesHeader/>
+            <IconesHeader/>
+        </header>
+    )
+}
+
+export default HeaderCOPIAR CÓDIGO
+De volta a "App.js", vamos substituir as importações de Logo, OpcoesHeader e IconesHeader pela importação do componente Header. Além disso, incluiremos o componente <Header /> no nosso código:
+
+import './App.css';
+import Header from './componentes/Header'
+
+function App() {
+    return (
+        <div className='App'>
+      <Header />
+    </div>
+  );
+}
+
+export default AppCOPIAR CÓDIGO
+Ao salvar e atualizar o navegador, teremos um erro. No arquivo "Header > index.js", precisamos importar Logo, OpcoesHeader e IconesHeader:
+
+import './estilo.css'
+import Logo from '../Logo'
+import OpcoesHeader from '../OpcoesHeader'
+import IconesHeader from '../IconesHeader'
+
+// ...COPIAR CÓDIGO
+Depois de salvar, tudo estará funcionando normalmente.
+
+Na próxima aula, vamos instalar o pacote e conhecer melhor a ferramenta.
 
 
 <br><br>
