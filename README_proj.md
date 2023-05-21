@@ -1,6 +1,8 @@
 
 # projeto-react-alura
 https://cursos.alura.com.br/formacao-full-stack-react-node-js
+https://create-react-app.dev/docs/getting-started/
+https://nodejs.org/en/docs
 
 # Aula 01.02
 ## teoria / história do React
@@ -291,10 +293,109 @@ No próximo vídeo, vamos aprender a componentizar.
 
 # Aula 02.04
 
+E se quiséssemos inserir dois logos na página? Se estivéssemos trabalhando com HTML, precisaríamos copiar o conteúdo entre as chaves <div> que estão dentro do header.
+
+Porém, isso deixaria nosso código maior. Por sorte, não precisamos fazer isso com React. Há uma maneira de tornar nosso código mais legível e reutilizável, evitando trechos duplicados. Basta usar componentes. Por exemplo, podemos definir que o seguinte trecho é um componente referente ao logotipo:
+
+<div className='logo'>
+    <img src={logo} alt='logo'></img>
+    <p><strong>Alura</strong>Books</p>
+</div>COPIAR CÓDIGO
+A seguir, vamos aprender como criar componetes. Primeiramente, vamos criar uma pasta chamada "componentes", dentro da pasta "src".
+
+Dentro de "src > componentes", criaremos uma pasta para cada componente. Como só estamos trabalhando com o logo, por enquanto, só criaremos a pasta "Logo" (com a letra L maiúscula). Dento dela, criaremos dois arquivos: "index.js" e "estilo.css".
+
+Todo componente é uma função JavaScript que retorna um HTML. Então, no arquivo "index.js", vamos abrir uma função chamada "Logo", por enquanto sem parâmetros. O retorno deverá ser o conteúdo entre as chaves <div> que estão dentro do header do arquivo "App.js". Vamos recortar esse trecho de "App.js" e colá-lo em "index.js", que ficará assim:
+
+function Logo () {
+    return(
+        <div className='logo'>
+            <img src={logo} alt='logo'></img>
+            <p><strong>Alura</strong>Books</p>
+        </div>
+    )
+}COPIAR CÓDIGO
+Precisamos informar, agora, ao "App.js" que o novo código que acabamos de criar será utilizado. De volta a "App.js", vamos importar o componente Logo e indicar seu caminho. O código ficará assim, com mudanças na linha 2:
+
+import './App.css';
+import Logo from './componentes/Logo';
+
+function App() {
+  return (
+    <div className="App">
+      <header className='App-header'>
+
+      </header>
+    </div>
+  );
+}
+
+export default App;COPIAR CÓDIGO
+Após salvar essa alteração, tanto o console como a aplicação indicarão erro. Isso acontece porque também precisamos importar a imagem do logo no arquivo "index.js", na primeira linha:
+
+import logo from '../../imagens/logo.svg'
+
+function Logo () {
+    return(
+        <div className='logo'>
+            <img src={logo} alt='logo'></img>
+            <p><strong>Alura</strong>Books</p>
+        </div>
+    )
+}COPIAR CÓDIGO
+Isso solucionará o erro. Agora vamos fazer o componente funcionar, inserindo-o dentro do header, como se fosse uma tag html, <Logo>:
+
+import './App.css';
+import Logo from './componentes/Logo'
+
+function App() {
+  return (
+    <div className="App">
+      <header className='App-header'>
+        <Logo></Logo>
+      </header>
+    </div>
+  );
+}
+
+export default App;COPIAR CÓDIGO
+Porém, um novo erro acontecerá, porque não exportamos o componente! Em "index.js", vamos inserir export default Logo na última linha:
+
+import logo from '../../imagens/logo.svg'
+
+function Logo () {
+    return(
+        <div className='logo'>
+            <img src={logo} alt='logo'></img>
+            <p><strong>Alura</strong>Books</p>
+        </div>
+    )
+}
+
+export default LogoCOPIAR CÓDIGO
+Depois que salvarmos com o "Ctrl + S", podemos acessar a aplicação. Lá, veremos que funcionou: o logo voltará a aparecer na tela.
+
+Vamos acessar "App.css", selecionar seu código e clicar em "Ctrl + X". Vamos acessar "estilo.css" e colar o código do estilo do logo lá. Vamos acessar "index.js" e importar o arquivo de estilo na primeira linha:
+
+import './estilo.css'
+import logo from '../../imagens/logo.svg'
+
+function Logo () {
+    return(
+        <div className='logo'>
+            <img src={logo} alt='logo'></img>
+            <p><strong>Alura</strong>Books</p>
+        </div>
+    )
+}
+
+export default LogoCOPIAR CÓDIGO
+No próximo vídeo, vamos estilizar.
+
 
 <br><br>
 
-# Aula 02.03
+# Aula 02.05
 
 
 <br><br>
