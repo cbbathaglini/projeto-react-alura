@@ -1680,12 +1680,149 @@ No próximo vídeo, finalmente, vamos manipular os estados, para que as buscas s
 
 <br><br>
 
-# Aula 04.03
+# Aula 04.06
+Agora vamos colocar os livros, que já acessamos com a ajuda do filtro, na tela.
+
+Vamos rever o conceito do .map, que aprendemos no início do curso. Antes de tudo, em "componentes > Pesquisa > index.js", vamos remover o console.log.
+
+Imediatamente acima da tag de fechamento de PesquisaContainer, vamos inserir livrosPesquisados.map(), entre chaves. Como parâmetro, informaremos uma arrow function:
+
+// ...
+
+function Pesquisa() {
+    const [ livrosPesquisados, setLivrosPesquisados ] = useState([])
+
+    return (
+        <PesquisaContainer>
+            <Titulo>Já sabe por onde começar?</Titulo>
+            <Subtitulo>Encontre seu livro em nossa estante.</Subtitulo>
+            <Input
+                placeholder="Escreva sua próxima leitura"
+                onBlur={evento => {
+                    const textoDigitado = evento.target.value
+                    const resultadoPesquisa = livros.filter( livro => livro.nome.includes(textoDigitado) )
+                    setLivrosPesquisados(resultadoPesquisa)
+                }}
+            />
+            { livrosPesquisados.map( livro => (
+
+            )) }
+        </PesquisaContainer>
+    )
+}
+
+export default PesquisaCOPIAR CÓDIGO
+Dentro dos parênteses, abriremos tags <p>. Dentro delas, passaremos o valor livro.nome. Também vamos abrir uma tag <img> cuja propriedade src será igual a livro.src, entre chaves. Assim retornaremos o nome do livro e sua imagem. Vamos colocar tudo isso entre tags <div>:
+
+// ...
+
+function Pesquisa() {
+    const [ livrosPesquisados, setLivrosPesquisados ] = useState([])
+
+    return (
+        <PesquisaContainer>
+            <Titulo>Já sabe por onde começar?</Titulo>
+            <Subtitulo>Encontre seu livro em nossa estante.</Subtitulo>
+            <Input
+                placeholder="Escreva sua próxima leitura"
+                onBlur={evento => {
+                    const textoDigitado = evento.target.value
+                    const resultadoPesquisa = livros.filter( livro => livro.nome.includes(textoDigitado) )
+                    setLivrosPesquisados(resultadoPesquisa)
+                }}
+            />
+            { livrosPesquisados.map( livro => (
+                <div>
+                    <p>{livro.nome}</p>
+                    <img src={livro.src}/>
+                </div>
+            ) ) }
+        </PesquisaContainer>
+    )
+}
+
+export default PesquisaCOPIAR CÓDIGO
+Vamos salvar. De volta à aplicação, se buscarmos por "Lid" novamente, como fizemos no último vídeo, teremos como resultado o nome do livro e sua imagem abaixo da barra de pesquisa. A mesma coisa acontecerá se buscarmos por qualquer um dos livros da nossa lista.
+
+Agora, vamos estilizar a barra de pesquisa. Em lugar de <div>, colocaremos a tag <Resultado>. Criaremos a constante Resultado para definir as estilizações. Por fim, vamos inverter a ordem das tags <p> e <img>, só por uma questão estética. O arquivo completo ficará assim:
+
+import Input from '../Input'
+import styled from 'styled-components'
+import { useState } from 'react'
+import { livros } from './dadosPesquisa'
+
+const PesquisaContainer = styled.section`
+    background-image: linear-gradient(90deg, #002F52 35%, #326589 165%);
+    color: #FFF;
+    text-align: center;
+    padding: 85px 0;
+    height: 270px;
+    width: 100%;
+`
+
+const Titulo = styled.h2`
+    color: #FFF;
+    font-size: 36px;
+    text-align: center;
+    width: 100%;
+`
+
+const Subtitulo = styled.h3`
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 40px;
+`
+
+const Resultado = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    p {
+        width: 200px;
+    }
+    img {
+        width: 100px;
+    }
+    &:hover {
+        border: 1px solid white;
+    }
+`
+
+function Pesquisa() {
+    const [ livrosPesquisados, setLivrosPesquisados ] = useState([])
+
+    return (
+        <PesquisaContainer>
+            <Titulo>Já sabe por onde começar?</Titulo>
+            <Subtitulo>Encontre seu livro em nossa estante.</Subtitulo>
+            <Input
+                placeholder="Escreva sua próxima leitura"
+                onBlur={evento => {
+                    const textoDigitado = evento.target.value
+                    const resultadoPesquisa = livros.filter( livro => livro.nome.includes(textoDigitado) )
+                    setLivrosPesquisados(resultadoPesquisa)
+                }}
+            />
+            { livrosPesquisados.map( livro => (
+                <Resultado>
+                    <img src={livro.src}/>
+                    <p>{livro.nome}</p>
+                </Resultado>
+            )) }
+        </PesquisaContainer>
+    )
+}
+
+export default PesquisaCOPIAR CÓDIGO
+Na próxima aula, aprenderemos sobre props.
 
 
 <br><br>
 
-# Aula 04.04
+# Aula 05.02
+
 
 
 <br><br>

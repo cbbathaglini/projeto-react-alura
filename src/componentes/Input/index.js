@@ -5,6 +5,7 @@ import { livros } from '../Pesquisa/dadosPesquisa'
 function Input() {
   const [ livrosPesquisados, setLivrosPesquisados ] = useState([])
   return (
+    <div>
     <InputType
         placeholder='Escreva sua próxima leitura'
         onBlur={evento => {
@@ -13,8 +14,18 @@ function Input() {
                 livro.nome.includes(textoDigitado) 
             )
             setLivrosPesquisados(resultadoPesquisa)
+            console.log(livrosPesquisados);
+            console.log(resultadoPesquisa);
         }}
     />
+    
+    {livrosPesquisados.map( (livro) => (
+        <Resultado>
+            <p>{livro.nome}</p>
+            <img src={livro.src}/>
+        </Resultado>
+    ) )}
+    </div>
   );
 }
 
@@ -37,3 +48,19 @@ const InputType = styled.input`
 `
 
 
+const Resultado = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    p {
+        width: 200px;
+    }
+    img {
+        width: 100px;
+    }
+    &:hover {
+        border: 1px solid white;
+    }
+`
