@@ -395,7 +395,366 @@ No próximo vídeo, vamos estilizar.
 
 <br><br>
 
-# Aula 02.05
+# Aula 02.08
+
+Vamos adicionar novas informações ao nosso header. Serão opções de texto e ícones.
+
+Para isso, voltaremos ao código. Abaixo de <Logo></Logo>, abriremos uma lista não ordenada, usando tags <ul>. Faremos isso porque criaremos três botões semelhantes, mas que nos redirecionarão a caminhos diversos.
+
+Entre as tags <ul> e </ul>, abriremos <li> e <p>. Dentro disso, escreveremos "CATEGORIAS". Vamos copiar essa linha e colá-la, para que tenhamos três iguais. Alterando o nome das outras duas para "MINHA ESTANTE" e "FAVORITOS":
+
+import './App.css';
+import Logo from './componentes/Logo'
+
+function App() {
+  return (
+    <div className="App">
+      <header className='App-header'>
+        <Logo></Logo>
+        <ul>
+          <li><p>CATEGORIAS</p></li>
+          <li><p>MINHA ESTANTE</p></li>
+          <li><p>FAVORITOS</p></li>
+        </ul>
+      </header>
+    </div>
+  );
+}
+
+export default AppCOPIAR CÓDIGO
+Os novos elementos já serão exibidos na aplicação. Agora vamos estilizá-los, acessando "App.css". Lá vamos inserir li, sem o ponto, para que estejamos nos referindo a todos os elementos desse tipo.
+
+Dentro disso, vamos passar list-style: none;, para remover o elemento visual que acompanhou as opções:
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(90deg, #002F52 35%, #326589);
+}
+
+.App-header {
+  background-color: #FFF;
+  display: flex;
+}
+
+li {
+  list-style: none;
+}COPIAR CÓDIGO
+Agora vamos voltar a "App.js" e adicionar className='opcoes' à tag <ul>:
+
+import './App.css';
+import Logo from './componentes/Logo'
+
+function App() {
+  return (
+    <div className="App">
+      <header className='App-header'>
+        <Logo></Logo>
+        <ul className='opcoes'>
+          <li><p>CATEGORIAS</p></li>
+          <li><p>MINHA ESTANTE</p></li>
+          <li><p>FAVORITOS</p></li>
+        </ul>
+      </header>
+    </div>
+  );
+}
+
+export default AppCOPIAR CÓDIGO
+De volta a "App.css", acima de li {, criaremos .opcoes, com display: flex.
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(90deg, #002F52 35%, #326589);
+}
+
+.App-header {
+  background-color: #FFF;
+  display: flex;
+}
+
+.opcoes {
+  display: flex;
+}
+
+li {
+  list-style: none;
+}COPIAR CÓDIGO
+Agora, os elementos estarão dispostos horizontalmente. Vamos adicionar outras informações.
+
+Vamos adicionar className='opcao' a cada uma das tags <li>:
+
+import './App.css';
+import Logo from './componentes/Logo'
+
+function App() {
+  return (
+    <div className="App">
+      <header className='App-header'>
+        <Logo></Logo>
+        <ul className='opcoes'>
+          <li className='opcao'><p>CATEGORIAS</p></li>
+          <li className='opcao'><p>MINHA ESTANTE</p></li>
+          <li className='opcao'><p>FAVORITOS</p></li>
+        </ul>
+      </header>
+    </div>
+  );
+}
+
+export default AppCOPIAR CÓDIGO
+Agora vamos modificar também "App.css", adicionando .opcao, com os estilos font-size, definido em 16px, display: flex, justify-content: center, align-items: center, text-align: center, height em 100%, padding: 0 5px, cursor: pointer e min-width, definido em 120px:
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(90deg, #002F52 35%, #326589);
+}
+
+.App-header {
+  background-color: #FFF;
+  display: flex;
+}
+
+.opcoes {
+  display: flex;
+}
+
+.opcao {
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  padding: 0 5px;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+li {
+  list-style: none;
+}COPIAR CÓDIGO
+Isso já melhorará bastante a aparência do nosso header. Agora vamos voltar ao arquivo "App.js".
+
+Entre as linhas 10 e 12, notamos a repetição do mesmo elemento, com a mesma classe e o mesmo filho. Pode parecer pouco, e de fato é. Mas e se precisássemos de 10 elementos como esses? O código ficaria imenso e impraticável.
+
+Vamos aprender a otimizar isso e escrever o código de maneira mais prática com o React. Logo após as importações, criaremos a constante textoOpcoes. Criaremos uma lista para guardar os textos: ['CATEGORIAS', 'FAVORITOS', 'MINHA ESTANTE']:
+
+import './App.css';
+import Logo from './componentes/Logo'
+
+const textoOpcoes = ['CATEGORIAS', 'FAVORITOS', 'MINHA ESTANTE']
+
+// código posterior omitidoCOPIAR CÓDIGO
+Depois disso, poderemos remover todos os elementos representados pelas tags <li> No lugar deles, adicionaremos { textoOpcoes.map( (texto) => () ) }, que nos permitirá varrer as arrays e retornar uma nova array como resultado. Será preciso retornar um elemento HTML, <li className='opcao'><p>{texto}</p></li>:
+
+import './App.css';
+import Logo from './componentes/Logo'
+
+const textoOpcoes = ['CATEGORIAS', 'FAVORITOS', 'MINHA ESTANTE']
+
+function App() {
+    return (
+        <div className='App'>
+            <header className='App-header'>
+                <Logo></Logo>
+                <ul className='opcoes'>
+                    { textoOpcoes.map ( (texto) => (
+                        <li className='opcao'><p>{texto}</p></li>
+                    ) ) }
+                </ul>
+      </header>
+    </div>
+  );
+}
+
+export default AppCOPIAR CÓDIGO
+Depois de salvarmos, poderemos notar que, mesmo com a alteração do código, o cabeçalho continua igual. Nossas alterações funcionaram.
+
+Agora vamos usar a mesma técnica para adicionar ícones aos elementos do header. Primeiro, vamos importar as imagens, abaixo da exportação do logo. As imagens se chamam "perfil" e "sacola":
+
+import './App.css';
+import Logo from './componentes/Logo'
+import perfil from './imagens/perfil.svg'
+import sacola from './imagens/sacola.svg'
+
+// ...COPIAR CÓDIGO
+Criaremos outra constante abaixo de textoOpcoes, chamada icones. Vamos colocar as imagens que acabamos de importar dentro da lista da constante, entre colchetes:
+
+import './App.css';
+import Logo from './componentes/Logo'
+import perfil from './imagens/perfil.svg'
+import sacola from './imagens/sacola.svg'
+
+const textoOpcoes = ['CATEGORIAS', 'FAVORITOS', 'MINHA ESTANTE']
+const icones = [perfil, sacola]
+
+// ...COPIAR CÓDIGO
+Depois, criaremos outra lista, entre tags <ul> com a classe "icones". Dentro dela, vamos executar o .map novamente, com o parâmetro icone. A única diferença com relação ao processo anterior é o uso de tags <img> ao invés de <p>. É preciso usar src para passar o ícone:
+
+import './App.css';
+import Logo from './componentes/Logo'
+import perfil from './imagens/perfil.svg'
+import sacola from './imagens/sacola.svg'
+
+const textoOpcoes = ['CATEGORIAS', 'FAVORITOS', 'MINHA ESTANTE']
+const icones = [perfil, sacola]
+
+function App() {
+    return (
+        <div className='App'>
+            <header className='App-header'>
+                <Logo></Logo>
+                <ul className='opcoes'>
+                    { textoOpcoes.map ( (texto) => (
+                        <li className='opcao'><p>{texto}</p></li>
+                    ) ) }
+                </ul>
+
+        <ul className='icones'>
+            { icones.map( (icone) => (
+              <li><img src={icone}></img></li>
+            )) }
+        </ul>
+      </header>
+    </div>
+  );
+}
+
+export default AppCOPIAR CÓDIGO
+Vamos salvar com "Ctrl + S". Atualizando a aplicação, veremos os ícones. Agora só precisaremos acessar "App.css", para colocá-los na horizontal.
+
+Para isso, vamos adicionar uma classe à tag <li> dos ícones, chamada 'icone':
+
+import './App.css';
+import Logo from './componentes/Logo'
+import perfil from './imagens/perfil.svg'
+import sacola from './imagens/sacola.svg'
+
+const textoOpcoes = ['CATEGORIAS', 'FAVORITOS', 'MINHA ESTANTE']
+const icones = [perfil, sacola]
+
+function App() {
+    return (
+        <div className='App'>
+            <header className='App-header'>
+                <Logo></Logo>
+                <ul className='opcoes'>
+                    { textoOpcoes.map ( (texto) => (
+                        <li className='opcao'><p>{texto}</p></li>
+                    ) ) }
+                </ul>
+
+        <ul className='icones'>
+            { icones.map( (icone) => (
+              <li className='icone'><img src={icone}></img></li>
+            )) }
+        </ul>
+      </header>
+    </div>
+  );
+}
+
+export default AppCOPIAR CÓDIGO
+Em App.css, acima de li {, vamos criar .icones. Nele, passaremos um display: flex e align-items: center:
+
+/* Código anterior omitido */
+
+.icones {
+  display: flex;
+  align-items: center;
+}
+
+li {
+  list-style: none;
+}COPIAR CÓDIGO
+Criaremos, também, .icone {, com um margin-right de 40px e width de 25px:
+
+/* ... */
+
+.icones {
+  display: flex;
+  align-items: center;
+}
+
+.icone {
+  margin-right: 40px;
+  width: 25px;
+}
+
+li {
+  list-style: none;
+}COPIAR CÓDIGO
+Agora, só precisamos centralizar os elementos do header. Faremos isso adicionando justify-content: center a .App-header {, no arquivo de estilização App.css:
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(90deg, #002F52 35%, #326589);
+}
+
+.App-header {
+  background-color: #FFF;
+  display: flex;
+  justify-content: center;
+}
+
+.opcoes {
+  display: flex;
+}
+
+.opcao {
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  padding: 0 5px;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.icones {
+  display: flex;
+  align-items: center;
+}
+
+.icone {
+  margin-right: 40px;
+  width: 25px;
+}
+
+li {
+  list-style: none;
+}COPIAR CÓDIGO
+Agora a aplicação estará bem melhor estilizada.
+
+No próximo vídeo, vamos voltar a manipular componentes.
+
+
+<br><br>
+
+# Aula 02.09
+
+
+<br><br>
+
+# Aula 02.03
+
+
+
+<br><br>
+
+# Aula 02.03
+
+
+
+<br><br>
+
+# Aula 02.03
 
 
 <br><br>
