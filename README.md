@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# projeto-react-alura
+https://cursos.alura.com.br/formacao-full-stack-react-node-js
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Aula 01.02
+## teoria / história do React
 
-## Available Scripts
+O React foi desenvolvido por Jordan Walke, um engenheiro do Facebook, e lançado em 2013. A ferramenta foi criada para facilitar a manutenção do site do Facebook.
 
-In the project directory, you can run:
+O React é, em resumo, uma **biblioteca JavaScript**. Ou seja, um conjunto de ferramentas que utiliza o JavaScript como código. Código este que, inclusive, é **aberto**. O React é sustentado pela Meta, a empresa do Facebook.
 
-### `npm start`
+Ele usa o **JSX** como linguagem, uma combinação de JavaScript e HTML. A reutilização de componentes da interface é uma das principais características do React que, além disso, ainda é extremamente fácil de usar.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Devemos aprender a utilizar esse tecnologia porque ela é a ferramenta de front-end mais utilizada e aceita pelo mercado em todo mundo. Consequentemente, existe uma grande demanda por ela no mercado da programação.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Segundo o Stack Overflow, que refaz essa pesquisa anualmente, o React é usado em 44% das demandas de desenvolvimento web do mercado.
 
-### `npm test`
+<br><br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Aula 01.03
+Para saber mais: JSX, a ''linguagem'' do React
+PRÓXIMA ATIVIDADE
 
-### `npm run build`
+O React usa uma sintaxe diferente do HTML ou do JavaScript que estamos acostumados a utilizar quando não estamos trabalhando com React,. Essa sintaxe é conhecida como JSX... mas o que precisamos saber mais sobre isso?
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Para entendermos melhor sobre essa novidade e, principalmente, sabermos o por que do uso desta ferramenta, sua importância e como ela auxilia o React a ser o que é hoje no mercado de trabalho, te convido a visitar um importante conteúdo que é referência para quem está conhecendo o React pela primeira vez.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Os criadores do React disponibilizaram uma introdução ao JSX para auxiliar desenvolvedores como você a compreender essa porta de entrada ao React.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+https://pt-br.legacy.reactjs.org/docs/introducing-jsx.html
 
-### `npm run eject`
+<br><br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Aula 01.04
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Para este curso precisamos instalar algumas ferramentas. Caso você ainda não tenha feito isso anteriormente, vou deixar um passo a passo na sequência:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Visual Studio Code
+Para fazer a instalação, devemos acessar o site do Visual Studio Code e fazer o download da versão de seu sistema operacional.
 
-## Learn More
+Node
+Caso precise instalar, os links estão na página oficial do NodeJS. Este curso foi desenvolvido usando a versão 16.15.1.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br><br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Aula 01.05
+Vamos dar nosso primeiro passo em direção a nos tornarmos desenvolvedores React. Faremos isso criando nossa primeira aplicação.
 
-### Code Splitting
+Agora que já temos todas as dependências necessárias para trabalhar com React, vamos abrir a IDE de nossa preferência. O instrutor utiliza o VS Code.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Vamos criar um novo arquivo, pelo caminho "Arquivo > Abrir > Nova Pasta". O nome da pasta será "alura-books", que será o nome do nosso site de livros. Depois, clicaremos em "Criar" e a pasta aparecerá. Vamos abri-la.
 
-### Analyzing the Bundle Size
+Agora vamos acessar "Terminal > Novo Terminal", para começarmos a criar nossa aplicação.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Vamos executar o comando npm init react-app ., que criará nossa aplicação React e, com o ., cria na pasta que está aberta. No caso, a pasta "alura-books":
 
-### Making a Progressive Web App
+npx create-react-app .COPIAR CÓDIGO
+O projeto será criado com todas as dependências. Vamos aguardar até que esteja pronto.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Quando a instalação estiver completa, veremos a mensagem "Happy hacking!" no terminal. Logo acima dessa mensagem, encontraremos os comandos que usaremos para rodar nossa aplicação. O comando que nos servirá durante o treinamento é npm start, que é responsável por fazer nossa aplicação rodar.
 
-### Advanced Configuration
+No menu lateral à esquerda, veremos que alguns arquivos foram criados automaticamente. O que buscaremos entender agora é o "package.json". Ele guarda as configurações do nosso projeto, como o nome, versão e dependências.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Vamos acessar a pasta "src". Dentro dela, há dois artigos que nos interessam: "App.js", que guarda o código que vamos manipular, e "App.css", o CSS padrão que nos servirá de referência. Vamos modificar bastante esses dois arquivos durante o treinamento.
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+No próximo vídeo, rodaremos nossa primeira aplicação.

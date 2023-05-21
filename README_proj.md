@@ -1,3 +1,4 @@
+
 # projeto-react-alura
 https://cursos.alura.com.br/formacao-full-stack-react-node-js
 
@@ -64,3 +65,58 @@ No menu lateral à esquerda, veremos que alguns arquivos foram criados automatic
 Vamos acessar a pasta "src". Dentro dela, há dois artigos que nos interessam: "App.js", que guarda o código que vamos manipular, e "App.css", o CSS padrão que nos servirá de referência. Vamos modificar bastante esses dois arquivos durante o treinamento.
 
 No próximo vídeo, rodaremos nossa primeira aplicação.
+
+
+
+<br><br>
+
+# Aula 01.06
+
+Vamos rodar nosso primeiro projeto React.
+
+Para fazer isso, basta voltar ao terminal de rodar o comando npm start, que dará início à nossa aplicação:
+
+npm startCOPIAR CÓDIGO
+Alguns logs acontecerão e, automaticamente, seremos redirecionados para nossa página no navegador. No terminal, você encontrará a informação "Local: http://localhost:300". É nesse link que encontraremos, sempre, nossa aplicação rodando.
+
+No momento, nossa aplicação é padrão, com um símbolo e link para a documentação da ferramenta. Vamos acessar, agora, "src > App.js".
+
+Vamos trocar o texto entre as chaves <p>, na linha 10, por "Alura":
+
+import logo from './logo.svg';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Alura
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
+
+export default App;COPIAR CÓDIGO
+Executando "Ctrl + S", salvamos e podemos atualizar o navegador. Quando fizermos isso, veremos "Alura" em exibição na tela da aplicação.
+
+Isso se chama Hot Reload, um carregamento automático. Não precisamos, portanto, parar e reiniciar nossa aplicação para verificar as alterações. Elas acontecem em tempo real.
+
+Dentro do código HTML, encontramos todos os elementos que estão sendo exibidos na tela da aplicação. É nessa parte do código que faremos as alterações.
+
+No próximo vídeo, trabalharemos no cabeçalho do nosso site!
+
+
+<br><br>
+
+# Aula 01.07
