@@ -1067,8 +1067,324 @@ https://styled-components.com/
 
 <br><br>
 
+# Aula 03.03
+
+Vamos aprender a usar o Styled Components. Com a ajuda dele, vamos criar containers.
+
+Containers são responsáveis por encapsular conteúdos, guardando elementos dentro deles, como acontece nas tags <div> entre as linhas 6 e 8 do arquivo "App.js".
+
+Agora vamos começar a criá-los usando Styled Components, e não mais CSS. Para dar início a esse processo, vamos acessar o arquivo "App.js" e importar a nova ferramenta, com import styled from 'styled-components':
+
+import './App.css';
+import Header from './componentes/Header'
+import styled from 'styled-components'
+
+// ...COPIAR CÓDIGO
+Logo abaixo, vamos criar a constante AppContainer e igualá-la a styled.div. div representa o elemento que queremos criar. Ao lado, vamos inserir duas crases e, dentro delas, vamos inserir o CSS, que pode ser encontrado no arquivo "App.css":
+
+import './App.css';
+import Header from './componentes/Header'
+import styled from 'styled-components'
+
+const AppContainer = styled.div`
+  .App {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(90deg, #002F52 35%, #326589);
+  }
+
+  li {
+    list-style: none;
+  }
+`
+
+// ...COPIAR CÓDIGO
+Agora, não precisamos mais criar classes. Podemos remover a linha .App:
+
+import './App.css';
+import Header from './componentes/Header'
+import styled from 'styled-components'
+
+const AppContainer = styled.div`
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(90deg, #002F52 35%, #326589);
+
+    li {
+        list-style: none;
+    }
+`COPIAR CÓDIGO
+Obs: Por enquanto, o li permanecerá aí. No futuro, porém, vamos trocá-lo de lugar.
+
+Abaixo, vamos substituir <div className='App'> por <AppContainer>. Agora poderemos usá-lo como um container:
+
+import './App.css';
+import Header from './componentes/Header'
+import styled from 'styled-components'
+
+const AppContainer = styled.div`
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(90deg, #002F52 35%, #326589);
+
+    li {
+        list-style: none;
+    }
+`
+
+function App() {
+    return (
+        <AppContainer>
+      <Header />
+    </AppContainer>
+  );
+}
+
+export default AppCOPIAR CÓDIGO
+Agora estamos usando o app estilizado com Styled Component. Ele é um container que guarda estilos.
+
+Podemos apagar a primeira linha do código, import './App.css';. Também podemos nos livrar do arquivo "App.css". Vamos movê-lo para o lixo. Agora nosso projeto está ainda mais simplificado, usando apenas JavaScript.
+
+Mudamos os caminhos, mas a estilização continua a mesma. Para confirmar, podemos conferir a aplicação no navegador.
+
+O header também é um container. Para confirmar isso, podemos acessar "componentes > Header > index.js". Vamos recriá-lo, mas dessa vez usando Styled Component.
+
+Em index.js, vamos fazer a importação do Styled Component e criar a constante HeaderContainer logo abaixo. Assim como fizemos em "App.js", vamos inserir duas crases e, dentro delas, trazer as informações de "estilo.css":
+
+import './estilo.css'
+import Logo from '../Logo'
+import OpcoesHeader from '../OpcoesHeader'
+import IconesHeader from '../IconesHeader'
+import styled from 'styled-components'
+
+const HeaderContainer = styled.header`
+    background-color: #FFF;
+    display: flex;
+    justify-content: center;
+`
+
+// ...COPIAR CÓDIGO
+Assim, podemos excluir o arquivo "componentes > Header > estilo.css" e apagar a importação de estilo.css no componente. Também vamos substituir <header className='App-header'> por <HeaderContainer>:
+
+import Logo from '../Logo'
+import OpcoesHeader from '../OpcoesHeader'
+import IconesHeader from '../IconesHeader'
+import styled from 'styled-components'
+
+const HeaderContainer = styled.header`
+    background-color: #FFF;
+    display: flex;
+    justify-content: center;
+`
+
+function Header() {
+    return(
+        <HeaderContainer>
+            <Logo/>
+            <OpcoesHeader/>
+            <IconesHeader/>
+        </HeaderContainer>
+    )
+}
+
+export default HeaderCOPIAR CÓDIGO
+Agora não precisamos mais nos preocupar com arquivos CSS ou com classes. No próximo vídeo, continuaremos substituindo arquivos CSS por Styled Component.
+
+<br><br>
+
+# Aula 03.05
+Vamos continuar usando Styled Component, agora para substituir os arquivos "estilo.css" remanescentes.
+
+Daremos início a partir de "componentes > IconesHeader > index.js". Vamos começar importando o Styled Component com import styled from 'styled-components'. Depois, criaremos a constante Icone, igualando-a a styled.li. Entre as duas crases, vamos inserir o conteúdo que havia em "estilo.css":
+
+import './estilo.css'
+import perfil from '../../imagens/perfil.svg'
+import sacola from '../../imagens/sacola.svg'
+import styled from 'styled-components'
+
+const Icone = styled.li`
+    margin-right: 40px;
+    width: 25px;
+`
+
+// ...COPIAR CÓDIGO
+Na função IconeHeader(), substituiremos <li className='icone'> por <Icone>:
+
+// ... 
+
+function IconesHeader() {
+    return (
+        <ul className='icones'>
+            { icones.map( (icone) => (
+            <Icone><img src={icone}></img></Icone>
+            )) }
+        </ul>
+    )
+}
+
+export default IconesHeaderCOPIAR CÓDIGO
+Agora, criaremos a constante Icones. Vamos igualá-la a styled.ul. Dentro das crases, vamos inserir o conteúdo de "componentes > IconesHeader > estilo.css". Na função IconesHeader(), substituiremos <ul className='icones'> por <Icones>:
+
+import './estilo.css'
+import perfil from '../../imagens/perfil.svg'
+import sacola from '../../imagens/sacola.svg'
+import styled from 'styled-components'
+
+const Icone = styled.li`
+    margin-right: 40px;
+    width: 25px;
+`
+
+const Icones = styled.ul`
+    display: flex;
+    align-items: center;
+`
+
+const icones = [perfil, sacola]
+
+function IconesHeader() {
+    return (
+        <Icones>
+            { icones.map( (icone) => (
+            <Icone><img src={icone}></img></Icone>
+            )) }
+        </Icones>
+    )
+}
+
+export default IconesHeaderCOPIAR CÓDIGO
+Podemos remover a importação de "estilo.css" e deletar o arquivo "estilo.css" da pasta "IconesHeader". Vamos salvar o código. Podemos conferir a aplicação no navegador: mesmo com as alterações no código, que o deixaram mais resumido, tudo continua a funcionar normalmente.
+
+Agora vamos manipular o arquivo "componentes > Logo > index.js".' Faremos a mesma coisa. Primeiramente, importaremos o styled-components.
+
+Depois, criaremos a constante LogoContainer e vamos igualá-la a styled.div. Dentro das crases, passaremos as informações de "componentes > Logo > estilo.css" referente ao logo. Na função Logo(), vamos substituir <div className='logo-container'> por <LogoContainer>:
+
+import './estilo.css'
+import logo from '../../imagens/logo.svg'
+import styled from 'styled-components'
+
+const LogoContainer = styled.div`
+    display: flex;
+    font-size: 30px;
+`
+
+function Logo () {
+    return(
+        <LogoContainer>
+            <img
+                src={logo}
+                alt='logo'
+                className='logo-img'
+            ></img>
+            <p><strong>Alura</strong>Books</p>
+        </LogoContainer>
+    )
+}
+
+export default LogoCOPIAR CÓDIGO
+Faremos a mesma coisa com a imagem do logotipo. Criaremos a contante LogoImage, com styled.img, passando as estilizações referentes à imagem. Na função Logo(), vamos substituir img por LogoImage, mantendo o src e o alt:
+
+import './estilo.css'
+import logo from '../../imagens/logo.svg'
+import styled from 'styled-components'
+
+const LogoContainer = styled.div`
+    display: flex;
+    font-size: 30px;
+`
+const LogoImage = styled.img`
+    margin-right: 10px;
+`
+
+function Logo () {
+    return(
+        <LogoContainer>
+            <LogoImage
+                src={logo}
+                alt='logo'
+            ></LogoImage>
+            <p><strong>Alura</strong>Books</p>
+        </LogoContainer>
+    )
+}
+
+export default LogoCOPIAR CÓDIGO
+Agora podemos remover a importação e deletar o arquivo "componentes > Logo > estilo.css". Além disso, como não há elementos filhos em <LogoImage>, podemos remover a tag de fechamento e usar a barra:
+
+import logo from '../../imagens/logo.svg'
+import styled from 'styled-components'
+
+const LogoContainer = styled.div`
+    display: flex;
+    font-size: 30px;
+`
+const LogoImage = styled.img`
+    margin-right: 10px;
+`
+
+function Logo () {
+    return(
+        <LogoContainer>
+            <LogoImage
+                src={logo}
+                alt='logo'
+            />
+            <p><strong>Alura</strong>Books</p>
+        </LogoContainer>
+    )
+}
+
+export default LogoCOPIAR CÓDIGO
+A aplicação continuará funcionando normalmente. Agora resta "componentes > OpcoesHeader > index.js". Vamos repetir o processo:
+
+import styled from 'styled-components'
+
+const Opcao = styled.li`
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    padding: 0 5px;
+    cursor: pointer;
+    min-width: 120px;
+`
+
+const Opcoes = styled.ul`
+    display: flex;
+`
+
+const textoOpcoes = ['CATEGORIAS', 'FAVORITOS', 'MINHA ESTANTE']
+
+function OpcoesHeader() {
+    return (
+        <Opcoes>
+            { textoOpcoes.map ( (texto) => (
+                <Opcao><p>{texto}</p></Opcao>
+            ) ) }
+        </Opcoes>
+    )
+}
+
+export default OpcoesHeaderCOPIAR CÓDIGO
+Agora podemos deletar o arquivo "componentes > OpcoesHeader > estilo.css".
+
+No próximo vídeo, vamos aprender sobre Global Style.
+
+<br><br>
+
 # Aula 02.03
 
+
+<br><br>
+
+# Aula 02.03
+
+
+<br><br>
+
+# Aula 02.03
 
 
 <br><br>
