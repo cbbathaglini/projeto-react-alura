@@ -1,12 +1,16 @@
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
-const textoOpcoes = ["CATEGORIAS", "FAVORITOS", "MINHA ESTANTE"]
+const textoOpcoes = ["CATEGORIAS", "FAVORITOS", "ESTANTE"]
 
 
 function OpcoesHeader() {
   return (
     <ListaOpcoesContainer>
-      {textoOpcoes.map( (opcao) => <OpcaoContainer><p>{opcao}</p></OpcaoContainer>)}
+      {textoOpcoes.map( (opcao) => 
+          <Link to={`/${opcao.toLowerCase()}`}>
+            <OpcaoContainer><p>{opcao}</p></OpcaoContainer>
+          </Link>)}
     </ListaOpcoesContainer>
   );
 }
