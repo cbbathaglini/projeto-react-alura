@@ -1,9 +1,21 @@
 import styled from 'styled-components'
-import {useState} from 'react'
-import { livros } from '../Pesquisa/dadosPesquisa'
+import {useEffect, useState} from 'react'
+import { getLivros } from '../../services/livros'
 
 function Input() {
   const [ livrosPesquisados, setLivrosPesquisados ] = useState([])
+  const [livros, setLivros] = useState([])
+
+  useEffect(() => {
+    fetchLivros()
+  },[])
+
+  async function fetchLivros(){
+    const listLivros =  await getLivros()
+    console.log("ahere: " + JSON.stringify(listLivros))
+    setLivros(listLivros)
+  }
+
   return (
     <div>
     <InputType
