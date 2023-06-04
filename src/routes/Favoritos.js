@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useEffect, useState } from 'react';
-import { getLivrosFavoritos } from '../services/livros_favoritos';
+import { deleteLivroFavoritos,getLivrosFavoritos } from '../services/livros_favoritos';
 import livroImg from '../imagens/livro.png'
 
 function Favoritos() {
@@ -13,8 +13,14 @@ function Favoritos() {
   },[])
 
   async function fetchLivrosFavoritos(){
-    const listLivrosFavoritosAPI =  await getLivrosFavoritos()
-    setLivrosFavoritos(listLivrosFavoritosAPI)
+    const listLivrosFavoritosAPI =  await getLivrosFavoritos();
+    setLivrosFavoritos(listLivrosFavoritosAPI);
+  }
+
+  async function deletarLivroFavorito(id){
+    console.log("Deletar")
+    await deleteLivroFavoritos(id);
+    await fetchLivrosFavoritos()
   }
 
  
@@ -25,7 +31,7 @@ function Favoritos() {
         <ResultadoContainer>
           {
             livrosFavoritos.length !== 0 ? livrosFavoritos.map(favorito => (
-              <Resultado>
+              <Resultado onClick={()=> deletarLivroFavorito(favorito.id)}>
                 <p>{favorito.nome}</p>
                 <img src={livroImg}/>
               </Resultado>

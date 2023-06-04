@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import {useEffect, useState} from 'react'
 import { getLivros } from '../../services/livros'
+import { postLivroFavorito } from '../../services/livros_favoritos';
+
 
 function Input() {
   const [ livrosPesquisados, setLivrosPesquisados ] = useState([])
@@ -15,6 +17,12 @@ function Input() {
     console.log("ahere: " + JSON.stringify(listLivros))
     setLivros(listLivros)
   }
+
+  async function insertFavorito(id){
+    await postLivroFavorito(id)
+    console.log("insertFavorito: livro inserido")
+  }
+
 
   return (
     <div>
@@ -32,7 +40,7 @@ function Input() {
     />
     
     {livrosPesquisados.map( (livro) => (
-        <Resultado>
+        <Resultado onClick={()=> insertFavorito(livro.id)}>
             <p>{livro.nome}</p>
             <img src={livro.src}/>
         </Resultado>

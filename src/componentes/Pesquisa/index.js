@@ -2,8 +2,10 @@ import styled from 'styled-components'
 import Input from '../Input';
 
 
+
 function Pesquisa() {
-    
+
+
     return (
         <PesquisaContainer>
             <Titulo>Já sabe por onde começar?</Titulo>

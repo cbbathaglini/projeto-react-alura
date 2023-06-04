@@ -5,7 +5,7 @@ const livrosFavoritosAPI = axios.create({baseURL: "http://localhost:8011/favorit
 
 async function getLivrosFavoritos(){
     const responseLivro = await livrosFavoritosAPI.get("/")
-    console.log("ah:"+ responseLivro.toString())
+    console.log("getlivros:"+ responseLivro.toString())
     return responseLivro.data
 }
 
@@ -16,7 +16,9 @@ async function postLivroFavorito(id){
 }
 
 async function deleteLivroFavoritos(id){
+    console.log("Delete livro: "+id)
     await livrosFavoritosAPI.delete(`/${id}`)
+
 }
 
 export {
